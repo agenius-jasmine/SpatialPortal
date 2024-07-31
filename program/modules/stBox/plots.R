@@ -760,6 +760,7 @@ add_cx_common_config <- function(cxObject) {
             printMagnification       = 3,
             selectionColor           = "#000000",
             legendBackgroundColor    = "#FFFFFF",
+            legendTitleAlign         = "center",
             titleAlign               = "center",
             subtitleAlign            = "center",
 
