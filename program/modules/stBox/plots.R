@@ -113,6 +113,7 @@ create_spatial_plot_cx <- function(plot_img_id, seurat, sig_gene_name, features,
                 transparency              = 1,
                 transparencyHidden        = 0.5,
                 visiumHideWhenFilter      = TRUE,
+                visiumFixedAspectRatio    = FALSE,
                 colorSpectrum             = colors,
                 colorSpectrumBreaks       = breaks,
                 filterMode                = "color",
@@ -196,6 +197,7 @@ create_cluster_plot_cx <- function(plot_img_id, seurat, file_name) {
                 transparency              = 1,
                 transparencyHidden        = 0.5,
                 visiumHideWhenFilter      = TRUE,
+                visiumFixedAspectRatio    = FALSE,
                 filterMode                = "color",
                 missingDataColor          = "#F0F0F0",
                 showLegendTitle           = FALSE,
@@ -228,19 +230,20 @@ create_tissue_plot_cx <- function(plot_img_id, seurat, file_name) {
         clusters     <- get_clusters(seurat = seurat)
 
         plot <- canvasXpress(
-            data            = data.frame(imagerow = -1, imagecol = -1),
+            data                   = data.frame(imagerow = -1, imagecol = -1),
             ### For interactive testing replace the backgroundImage javascript reference line
             # backgroundImage  = Seurat::GetImage(seurat, mode = "raw", image = "slice1"),
-            backgroundImage = glue('javascript://{plot_img_id}'),
-            backgroundType  = "panel",
-            title           = "Tissue",
-            setMinX         = max(0,   floor(min(coordinates$imagecol) - buffer.space)),
-            setMaxX         = min(600, ceiling(max(coordinates$imagecol) + buffer.space)),
-            setMinY         = max(0,   floor(min(coordinates$imagerow) - buffer.space)),
-            setMaxY         = min(600, ceiling(max(coordinates$imagerow) + buffer.space)),
-            broadcastGroup  = plot_img_id,
-            movable         = FALSE,
-            saveFilename    = file_name) %>% add_cx_common_config
+            backgroundImage        = glue('javascript://{plot_img_id}'),
+            backgroundType         = "panel",
+            title                  = "Tissue",
+            setMinX                = max(0,   floor(min(coordinates$imagecol) - buffer.space)),
+            setMaxX                = min(600, ceiling(max(coordinates$imagecol) + buffer.space)),
+            setMinY                = max(0,   floor(min(coordinates$imagerow) - buffer.space)),
+            setMaxY                = min(600, ceiling(max(coordinates$imagerow) + buffer.space)),
+            broadcastGroup         = plot_img_id,
+            movable                = FALSE,
+            visiumFixedAspectRatio = FALSE,
+            saveFilename           = file_name) %>% add_cx_common_config
     }
     plot
 }
@@ -309,6 +312,7 @@ create_pathology_plot_cx <- function(plot_img_id, seurat, file_name) {
                 transparency              = 1,
                 transparencyHidden        = 0.5,
                 visiumHideWhenFilter      = TRUE,
+                visiumFixedAspectRatio    = FALSE,
                 colors                    = colors,
                 filterMode                = "color",
                 missingDataColor          = "#F0F0F0",
